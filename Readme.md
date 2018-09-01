@@ -3,7 +3,7 @@
 
 直入主题, 看图 (不好意思, 没gif动图)
 ----
-![image](https://github.com/cymok/ThumbSeekBarDemo/Screenshot/Screenshot.png)
+![image](https://github.com/cymok/ThumbSeekBarDemo/blob/master/Screenshot/Screenshot.png)
 
 拷贝 SeekBarHelper 类到自己项目中, 然后...
 
