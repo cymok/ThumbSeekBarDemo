@@ -1,9 +1,11 @@
 动态修改SeekBar的Thumb
 =======
 
-直入主题, 看图 (不好意思, 没gif动图)
+效果:
 ----
-![image](https://github.com/cymok/ThumbSeekBarDemo/blob/master/Screenshot/Screenshot.png)
+
+<img src="/Screenshot/Screenshot.png" width="270" height="480" alt="截图"/>
+(不好意思, 没gif动图)
 
 使用:
 ----
