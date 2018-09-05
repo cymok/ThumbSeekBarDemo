@@ -1,9 +1,10 @@
 package com.google.thumbseekbardemo
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.SeekBar
-import com.blankj.utilcode.util.ToastUtils
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,8 +16,10 @@ class MainActivity : AppCompatActivity() {
         val seekBar: SeekBar = findViewById(R.id.seek_bar)
 
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            @SuppressLint("SetTextI18n")
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                ToastUtils.showShort("progress = $progress")
+//                ToastUtils.showShort("progress = $progress")
+                findViewById<TextView>(R.id.tv).text = "progress = $progress"
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {

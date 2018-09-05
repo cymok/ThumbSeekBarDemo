@@ -1,10 +1,10 @@
 package com.google.thumbseekbardemo;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.SeekBar;
-
-import com.blankj.utilcode.util.ToastUtils;
+import android.widget.TextView;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -15,9 +15,11 @@ public class Main2Activity extends AppCompatActivity {
 
         SeekBar seekBar = findViewById(R.id.seek_bar);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                ToastUtils.showShort("progress = " + progress);
+//                ToastUtils.showShort("progress = " + progress);
+                ((TextView) findViewById(R.id.tv)).setText("progress = " + progress);
             }
 
             @Override
