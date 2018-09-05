@@ -94,10 +94,13 @@ open class SeekBarHelper private constructor(seekBar: SeekBar) {
         val clazz = SeekBar::class.java
         val field = clazz.getDeclaredField("mOnSeekBarChangeListener")
         field.isAccessible = true
-        if (seekBar == null) {
-            return null
+        when (seekBar) {
+            null -> return null
+            else -> {
+                val any = field.get(seekBar) ?: return null
+                return any as SeekBar.OnSeekBarChangeListener
+            }
         }
-        return field.get(seekBar) as SeekBar.OnSeekBarChangeListener
     }
 
     private fun getDrawable(context: Context, text: String): Drawable {
