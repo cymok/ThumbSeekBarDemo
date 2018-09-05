@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
 import android.view.Gravity
 import android.view.View
@@ -28,6 +29,7 @@ open class SeekBarHelper private constructor(seekBar: SeekBar) {
     private var mSuffix: String? = ""
 
     private var mSpTextSize: Float = 12.0f
+    private var mTextColor: Int = 0xffffff
     private var mDpWidth: Float = 160.0f
     private var mDpHeight: Float = 100.0f
     private var mDrawableRes: Int = -1
@@ -64,6 +66,11 @@ open class SeekBarHelper private constructor(seekBar: SeekBar) {
 
     open fun setTextSize(spTextSize: Float): SeekBarHelper {
         mSpTextSize = spTextSize
+        return this
+    }
+
+    open fun setTextColor(@ColorInt textColor: Int): SeekBarHelper {
+        mTextColor = textColor
         return this
     }
 
@@ -114,6 +121,7 @@ open class SeekBarHelper private constructor(seekBar: SeekBar) {
         }
         view.text = text
         view.textSize = textSize.toFloat()
+        view.setTextColor(mTextColor)
         view.isAllCaps = false
         view.maxLines = 1
         view.gravity = Gravity.CENTER//?

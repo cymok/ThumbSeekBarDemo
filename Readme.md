@@ -15,7 +15,7 @@ SeekBarHelper.getInstance(seekBar)//直接传入你的SeekBar对象后使用
     .setBackground(R.drawable.shape_thumb_bg, 200.0f, 80.0f)//thumb 背景 宽 高
     .execute()
 ```
-字体颜色和其它的就自己搬代码动手吧
+其它属性就自己搬代码动手吧
 
 Java代码中使用:
 ```java
