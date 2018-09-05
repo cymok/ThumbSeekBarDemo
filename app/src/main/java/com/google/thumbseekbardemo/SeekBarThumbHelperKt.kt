@@ -21,7 +21,7 @@ import com.blankj.utilcode.util.ConvertUtils
  *
  * Created by @Harry on 2018-09-01
  */
-open class SeekBarHelper private constructor(seekBar: SeekBar) {
+open class SeekBarThumbHelperKt private constructor(private val seekBar: SeekBar) {
 
     private var mSeekBar: SeekBar? = seekBar
 
@@ -37,39 +37,39 @@ open class SeekBarHelper private constructor(seekBar: SeekBar) {
     companion object {
         @SuppressLint("StaticFieldLeak")
         @Volatile
-        private var instance: SeekBarHelper? = null
+        private var sInstance: SeekBarThumbHelperKt? = null
 
-        fun getInstance(seekBar: SeekBar): SeekBarHelper {
-            if (instance == null) {
-                synchronized(SeekBarHelper::class) {
-                    if (instance == null) {
-                        instance = SeekBarHelper(seekBar)
+        fun getInstance(seekBar: SeekBar): SeekBarThumbHelperKt {
+            if (sInstance == null) {
+                synchronized(SeekBarThumbHelperKt::class) {
+                    if (sInstance == null) {
+                        sInstance = SeekBarThumbHelperKt(seekBar)
                     }
                 }
             }
-            return instance!!
+            return sInstance!!
         }
     }
 
-    open fun setTextFlavor(prepositive: String?, suffix: String?): SeekBarHelper {
+    open fun setTextFlavor(prepositive: String?, suffix: String?): SeekBarThumbHelperKt {
         mPrepositive = prepositive
         mSuffix = suffix
         return this
     }
 
-    open fun setBackground(@DrawableRes drawableRes: Int, dpWidth: Float, dpHeight: Float): SeekBarHelper {
+    open fun setBackground(@DrawableRes drawableRes: Int, dpWidth: Float, dpHeight: Float): SeekBarThumbHelperKt {
         mDpWidth = dpWidth
         mDpHeight = dpHeight
         mDrawableRes = drawableRes
         return this
     }
 
-    open fun setTextSize(spTextSize: Float): SeekBarHelper {
+    open fun setTextSize(spTextSize: Float): SeekBarThumbHelperKt {
         mSpTextSize = spTextSize
         return this
     }
 
-    open fun setTextColor(@ColorInt textColor: Int): SeekBarHelper {
+    open fun setTextColor(@ColorInt textColor: Int): SeekBarThumbHelperKt {
         mTextColor = textColor
         return this
     }
@@ -98,16 +98,14 @@ open class SeekBarHelper private constructor(seekBar: SeekBar) {
     }
 
     private fun getOnSeekBarChangeListener(seekBar: SeekBar?): SeekBar.OnSeekBarChangeListener? {
+        if (seekBar == null) {
+            return null
+        }
         val clazz = SeekBar::class.java
         val field = clazz.getDeclaredField("mOnSeekBarChangeListener")
         field.isAccessible = true
-        when (seekBar) {
-            null -> return null
-            else -> {
-                val any = field.get(seekBar) ?: return null
-                return any as SeekBar.OnSeekBarChangeListener
-            }
-        }
+        val any = field.get(seekBar) ?: return null
+        return any as SeekBar.OnSeekBarChangeListener
     }
 
     private fun getDrawable(context: Context, text: String): Drawable {
@@ -124,11 +122,13 @@ open class SeekBarHelper private constructor(seekBar: SeekBar) {
         view.setTextColor(mTextColor)
         view.isAllCaps = false
         view.maxLines = 1
-        view.gravity = Gravity.CENTER//?
+        //?
+        view.gravity = Gravity.CENTER
         //未显示的view必须layout
         view.setPadding(0, (height - view.lineHeight) / 2, 0, (height - view.lineHeight) / 2)
 
-        view.layout(0, 0, width, height)//未显示的view必须layout
+        //未显示的view必须layout
+        view.layout(0, 0, width, height)
         return loadDrawableFromView(view)
     }
 
@@ -143,8 +143,8 @@ open class SeekBarHelper private constructor(seekBar: SeekBar) {
         return bitmap
     }
 
-    private fun loadDrawableFromView(v: View): Drawable {
-        val bitmap = loadBitmapFromView(v)
+    private fun loadDrawableFromView(view: View): Drawable {
+        val bitmap = loadBitmapFromView(view)
         return BitmapDrawable(null, bitmap)
     }
 

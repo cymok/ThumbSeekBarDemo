@@ -36,7 +36,7 @@ public class Main2Activity extends AppCompatActivity {
 
         seekBar.setMax(1000);//设置取值范围
 
-        SeekBarHelper.Companion.getInstance(seekBar)//直接传入你的SeekBar对象后使用
+        SeekBarThumbHelper.getInstance(seekBar)//直接传入你的SeekBar对象后使用
                 .setTextSize(12.0f)//字体大小
                 .setTextColor(Color.RED)//字体颜色
                 .setTextFlavor(null, " 米")//前缀 后缀
